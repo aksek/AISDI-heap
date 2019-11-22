@@ -33,7 +33,7 @@ void unit_test()
     assert(heap.peek().first == 100);
 
     heap.insert(5, 5);		// [5, 10, 20, 40, 50, 100]
-    // assert(heap.peek().first == 5);
+    assert(heap.peek().first == 100);
 
 	heap.print(std::cout);
 
@@ -41,25 +41,44 @@ void unit_test()
     assert(heap.size() == 6);
 
     // pobieranie elementów
-    heap.pop();				// [10, 20, 40, 50, 100]
-    // assert(heap.peek().first == 10);
+    heap.pop();				// [10, 20, 40, 50, 5]
+    assert(heap.peek().first == 50);
     assert(heap.size() == 5);
 
-    heap.pop();				// [20, 40, 50, 100]
-    // assert(heap.peek().first == 20);
+    heap.pop();				// [20, 40, 10, 5]
+    heap.print(std::cout);
+    assert(heap.peek().first == 40);
 
-    heap.pop();				// [40, 50, 100]
-    // assert(heap.peek().first == 40);
+    heap.pop();				// [5, 10, 20]
+    assert(heap.peek().first == 20);
 
-    heap.pop();				// [50, 100]
-    // assert(heap.peek().first == 50);
+    heap.pop();				// [5, 10]
+    assert(heap.peek().first == 10);
 
-    heap.pop();				// [100]
-    // assert(heap.peek().first == 100);
+    heap.pop();				// [5]
+    assert(heap.peek().first == 5);
 
     heap.pop();
     assert(heap.empty());
     heap.print(std::cout);
+
+    int random;
+    for (int i = 0; i < 30; ++i) {
+        random = rand() % 200;
+        heap.insert(random, random);
+        if (i % 10 == 0) {
+            heap.print(std::cout);
+            std::cout << '\n';
+        }
+    }
+    
+    for (int i = 0; i < 30; ++i) {
+        heap.pop();
+        if (i % 10 == 0) {
+            heap.print(std::cout);
+            std::cout << '\n';
+        }
+    }
 }
 
 int main()

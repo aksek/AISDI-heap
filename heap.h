@@ -32,12 +32,15 @@ class Heap4 {
 		(this->heap)[i2] = temp;
 	}
 
-	KeyValueType pop() noexcept {
-		if (!this->empty()) {
-			this->swap(0, this->size() - 1);
-			this->heap.pop_back();
-			this->heapifyDown(0);
+	KeyValueType pop() {
+		if (this->empty()) {
+			throw std::logic_error("The heap is empty");
 		}
+		KeyValueType deletedEl = (this->heap)[0];
+		this->swap(0, this->size() - 1);
+		this->heap.pop_back();
+		this->heapifyDown(0);
+		return deletedEl;
 	}
 
 	size_t size() const noexcept {
